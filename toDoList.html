@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+    <script src="toDo.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" >
+</head>
+<body>
+    <h1>ToDo LIST</h1>
+    <input name="item" type="text" onkeypress="return addEnter(event)">
+    <button onclick="add()">Add</button>
+
+    <ul id="list"></ul>
+    <h2 id="items-count"></h2>
+</body>
+</html>

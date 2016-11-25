@@ -1,17 +1,13 @@
 function add() {
     var input = document.getElementsByName('item')[0];
 
-
     if (input.value) {
         var li = document.createElement('li');
         li.innerText = input.value;
-        li.onclick = select;
-        input.value = "";
+        input.value = '';
         var ul = document.getElementById('list');
         ul.appendChild(li);
-        amount++;
-        console.log(amount);
-
+        recount();
 
         var remove = document.getElementsByClassName('remove');
         var span = document.createElement('span');
@@ -21,17 +17,17 @@ function add() {
         li.appendChild(span);
 
         for (i = 0; i < remove.length; i++) {
-             remove[i].onclick = function() {
-                 this.parentElement.remove();
-                 amount--;
-                 document.getElementById('items-count').innerHTML = amount + ' items';
-                 console.log(amount);
-             }
+            remove[i].onclick = function () {
+                this.parentElement.remove();
+                recount();
+            }
         }
+
+        li.onclick = select;
     } else {
-            alert('You don\'t write!');
-        }
-    document.getElementById('items-count').innerHTML = amount + ' items';
+        alert('You don\'t write!');
+    }
+
 }
 
 function addEnter(ev) {
@@ -43,9 +39,22 @@ function addEnter(ev) {
 function select() {
     var el = event.toElement;
     el.classList.toggle('checked');
+    if (el.classList.contains('checked')) {
+        recount();
+    } else {
+        recount();
+    }
 }
 
 
-var count = document.querySelectorAll('li');
-var amount = count.length;
+function recount() {
+    var totalCount = document.querySelectorAll('li').length;
+    var doneCount = document.querySelectorAll('li.checked').length;
+    var count = totalCount - doneCount;
+    document.getElementById('items-count').innerHTML = count + ' items to do / ' + doneCount + ' items done';
+}
+
+
+
+
 
